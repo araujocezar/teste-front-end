@@ -1,0 +1,22 @@
+<div fxLayoutAlign="center">
+    <mat-card class="card-search mat-elevation-z8" fxFlex=70 fxFlex.xs=100>
+        <div fxFlex class="search" fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex=85 fxFlex.xs=60>
+                <form [formGroup]="formSearch">
+                    <mat-form-field fxFlex>
+                        <mat-label>Pesquisar</mat-label>
+                        <input matInput formControlName="stringSeach">
+                        <mat-error *ngIf="formSearch.controls.stringSeach.hasError('required')">
+                            O campo é obrigatório.
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="btn-search" fxFlex=10 fxFlex.xs=20>
+                <button mat-raised-button>
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-card>
+</div>
