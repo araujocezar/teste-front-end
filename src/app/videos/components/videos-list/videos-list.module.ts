@@ -1,3 +1,4 @@
+import { VideosCardModule } from './../videos-card/videos-card.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,6 +22,7 @@ import { VideoListRoutes } from './videos-list.routing';
         ReactiveFormsModule,
         FormsModule,
         RouterModule.forChild(VideoListRoutes),
+        VideosCardModule
     ],
 
     exports: [
