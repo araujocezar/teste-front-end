@@ -11,6 +11,7 @@ import { Videos } from '../../interfaces/videos.interface';
 export class VideosListComponent implements OnInit {
   formSearch: FormGroup;
   videos: Videos;
+  load: boolean;
 
   constructor(
     formBuilder: FormBuilder,
@@ -23,6 +24,7 @@ export class VideosListComponent implements OnInit {
         Validators.minLength(2)
       ])]
     });
+    this.load = false;
    }
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class VideosListComponent implements OnInit {
 
   insertVideos(result) {
     this.videos = result;
-    console.log(this.videos);
+    this.load = true;
   }
 
   onClickSearch() {

@@ -1,22 +1,27 @@
-<div fxLayoutAlign="center">
-    <mat-card class="card-search mat-elevation-z8" fxFlex=70 fxFlex.xs=100>
-        <div fxFlex class="search" fxLayout="row" fxLayoutAlign="space-around center">
-            <div fxFlex=85 fxFlex.xs=60>
-                <form [formGroup]="formSearch">
-                    <mat-form-field fxFlex>
-                        <mat-label>Pesquisar</mat-label>
-                        <input matInput formControlName="stringSeach">
-                        <mat-error *ngIf="formSearch.controls.stringSeach.hasError('required')">
-                            O campo é obrigatório.
-                        </mat-error>
-                    </mat-form-field>
-                </form>
+<div fxLayoutGap="16px" fxLayout="column">
+    <div fxLayoutAlign="center">
+        <mat-card class="card-search mat-elevation-z8" fxFlex=70 fxFlex.xs=100>
+            <div fxFlex class="search" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex=85 fxFlex.xs=60>
+                    <form [formGroup]="formSearch">
+                        <mat-form-field fxFlex>
+                            <mat-label>Pesquisar</mat-label>
+                            <input matInput formControlName="stringSeach">
+                            <mat-error *ngIf="formSearch.controls.stringSeach.hasError('required')">
+                                O campo é obrigatório.
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="btn-search" fxFlex=10 fxFlex.xs=20>
+                    <button mat-raised-button (click)="onClickSearch()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
             </div>
-            <div class="btn-search" fxFlex=10 fxFlex.xs=20>
-                <button mat-raised-button (click)="onClickSearch()">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
-        </div>
-    </mat-card>
+        </mat-card>
+    </div>
+    <div *ngIf="this.load" fxLayout="row wrap" >
+        <app-videos-card *ngFor="let video of videos?.items;" [video]="video" fxFlex="33" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25"></app-videos-card>
+    </div>
 </div>

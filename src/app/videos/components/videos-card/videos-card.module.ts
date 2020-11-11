@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { VideosCardComponent } from './videos-card.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
     imports: [
         CommonModule,
         FlexLayoutModule,
-        MatButtonModule
+        MatButtonModule,
+        MatCardModule
     ],
     exports: [
         VideosCardComponent
