@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   api: {
     endpoint: 'https://www.googleapis.com/youtube/v3',
-    key: 'AIzaSyCYibdtnv2ND9qzzViUfx9R3LrsbO3G1a4',
     part: 'id,snippet',
     maxResults: 10
   }
