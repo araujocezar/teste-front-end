@@ -1,5 +1,5 @@
 import { VideosService } from './../../services/videos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Videos } from '../../interfaces/videos.interface';
 
@@ -12,6 +12,8 @@ export class VideosListComponent implements OnInit {
   formSearch: FormGroup;
   videos: Videos;
   load: boolean;
+  processing: boolean;
+  endPaginate: boolean;
 
   constructor(
     formBuilder: FormBuilder,
@@ -25,10 +27,23 @@ export class VideosListComponent implements OnInit {
       ])]
     });
     this.load = false;
+    this.processing = true;
+    this.endPaginate = false;
    }
 
   ngOnInit() {
     this.getVideos();
+  }
+
+  @HostListener('window:scroll', ['$event']) onWindowScroll($event) {
+    if (this.processing === false && this.endPaginate === false) {
+      const target = $event.target.documentElement;
+      const scrollPercent = ((target.clientHeight + target.scrollTop) / target.scrollHeight) * 100;
+
+      if (scrollPercent > 95) {
+        // this.movieService.getPopular(this.page).then((res) => this.insertFilms(res.data.results));
+      }
+    }
   }
 
   async getVideos() {

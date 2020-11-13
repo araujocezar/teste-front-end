@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-videos-detail',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideosDetailComponent implements OnInit {
 
-  constructor() { }
+  videoId: string;
+
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.videoId = this.activatedRoute.snapshot.params.id;
+  }
 
   ngOnInit(): void {
   }
-
+  onClick() {
+  }
 }

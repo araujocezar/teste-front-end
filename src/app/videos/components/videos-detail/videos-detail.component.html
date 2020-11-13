@@ -1,1 +1,48 @@
-<p>videos-detail works!</p>
+<div fxLayout="column" fxFlex>
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start center">
+        <button class="button" mat-raised-button (click)="onClick()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <h3>Titulo do vídeo</h3>
+    </div>
+    <div fxFlex fxLayoutGap="16px" fxLayout="column">
+        <div class="embed">
+            <iframe fxFlex src="https://www.youtube.com/embed/us1mxpXdsDc"></iframe>
+        </div>
+        <div fxLayout="row" class="header">
+            <div fxFlex=50 class="texto">
+                <strong>Nome do canal</strong>
+            </div>
+            <div fxFlex=50>
+                <div fxFlex=50 fxLayoutAlign="center center">
+                    <div>
+                        <mat-icon>thumb_up</mat-icon>
+                    </div>
+                    <div class="feedback">
+                        0000
+                    </div>  
+                </div>
+                <div fxFlex=50 fxLayoutAlign="center center">
+                    <div>
+                        <mat-icon>thumb_down</mat-icon>
+                    </div>
+                    <div class="feedback">
+                        0000
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            Material icons are delightful, beautifully crafted symbols for common actions and items. Download on desktop to use them
+            in your digital products for Android, iOS, and web.
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+            <div>
+                <mat-icon>visibility</mat-icon>
+            </div>
+            <div class="feedback">
+                9999
+            </div>
+        </div>
+    </div>
+</div>

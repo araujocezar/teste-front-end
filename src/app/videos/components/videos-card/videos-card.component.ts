@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Item, Videos } from '../../interfaces/videos.interface';
 
 @Component({
   selector: 'app-videos-card',
@@ -7,12 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class VideosCardComponent implements OnInit {
 
-  @Input() video: any[];
+  @Input() video: Item;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.video);
+  }
+  onClickDetail() {
   }
 
 }
