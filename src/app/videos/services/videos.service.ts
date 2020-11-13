@@ -21,6 +21,15 @@ export class VideosService {
     return axios.get('/search', {params: param});
   }
 
+  getVideoDetail(videoId: string): Promise<AxiosResponse<Videos>> {
+    const param = {
+      part: environment.api.partDetail,
+      id: videoId,
+      key: environment.api.key,
+    };
+    return axios.get('/videos', { params: param });
+  }
+
   private registerBaseEndpoint(endpoint: string) {
     axios.defaults.baseURL = endpoint;
   }

@@ -15,8 +15,12 @@
 }
 .header{
     margin-top: 24px;
-    .feedback{
-        margin-left: 4px;
-        font-size: 12px
-    }
+}
+.description{
+  font-size: 14px;
+}
+.feedback{
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
 }
