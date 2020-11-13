@@ -1,7 +1,7 @@
 import { VideosService } from './../../services/videos.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Videos } from '../../interfaces/videos.interface';
+import { Item, Videos } from '../../interfaces/videos.interface';
 
 @Component({
   selector: 'app-videos-list',
@@ -10,10 +10,11 @@ import { Videos } from '../../interfaces/videos.interface';
 })
 export class VideosListComponent implements OnInit {
   formSearch: FormGroup;
-  videos: Videos;
+  items: Item[];
   load: boolean;
   processing: boolean;
   endPaginate: boolean;
+  pageToken: string;
 
   constructor(
     formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class VideosListComponent implements OnInit {
       ])]
     });
     this.load = false;
+    this.items = [];
     this.processing = true;
     this.endPaginate = false;
    }
@@ -41,25 +43,33 @@ export class VideosListComponent implements OnInit {
       const scrollPercent = ((target.clientHeight + target.scrollTop) / target.scrollHeight) * 100;
 
       if (scrollPercent > 95) {
-        // this.movieService.getPopular(this.page).then((res) => this.insertFilms(res.data.results));
+        this.videosService.getVideos('teste', this.pageToken).then((res) => this.insertFilms(res.data.items, res.data));
       }
     }
   }
 
   async getVideos() {
-    const result = await this.videosService.getVideos('teste');
-    this.insertVideos(result.data);
-  }
-
-  insertVideos(result) {
-    this.videos = result;
-    this.load = true;
+    this.videosService.getVideos('teste').then((res) => this.insertFilms(res.data.items, res.data));
   }
 
   onClickSearch() {
     let search = this.formSearch.controls.stringSeach.value;
     search = search.replaceAll(' ', '+');
-    console.log(search);
+  }
+
+  insertFilms(item: Item[], data) {
+    this.pageToken = data.nextPageToken;
+    if (this.items.length > 0) {
+      this.items.push(...item);
+    } else {
+      this.items = item;
+    }
+
+    this.processing = false;
+
+    if (item.length === 0) {
+      this.endPaginate = true;
+    }
   }
 
 }

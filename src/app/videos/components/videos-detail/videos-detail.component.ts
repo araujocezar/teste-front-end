@@ -29,7 +29,7 @@ export class VideosDetailComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.videosService.getVideoDetail(this.videoId).then((res) => this.video = res.data);
     this.item = this.video.items[0];
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    this.urlSafe = await this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
   onClickBack() {

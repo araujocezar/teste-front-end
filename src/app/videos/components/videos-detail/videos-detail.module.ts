@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { VideoDetailRoutes } from './videos-detail.routing';
 import { RouterModule } from '@angular/router';
 
@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
         MatButtonModule,
         MatIconModule,
         RouterModule.forChild(VideoDetailRoutes),
+        MatProgressSpinnerModule
 
     ],
     exports: [
