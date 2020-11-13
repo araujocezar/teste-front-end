@@ -15,6 +15,7 @@ export class VideosListComponent implements OnInit {
   processing: boolean;
   endPaginate: boolean;
   pageToken: string;
+  stringSearch: any;
 
   constructor(
     formBuilder: FormBuilder,
@@ -34,7 +35,6 @@ export class VideosListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getVideos();
   }
 
   @HostListener('window:scroll', ['$event']) onWindowScroll($event) {
@@ -43,18 +43,19 @@ export class VideosListComponent implements OnInit {
       const scrollPercent = ((target.clientHeight + target.scrollTop) / target.scrollHeight) * 100;
 
       if (scrollPercent > 95) {
-        this.videosService.getVideos('teste', this.pageToken).then((res) => this.insertFilms(res.data.items, res.data));
+        this.videosService.getVideos(this.stringSearch, this.pageToken).then((res) => this.insertFilms(res.data.items, res.data));
       }
     }
   }
 
-  async getVideos() {
-    this.videosService.getVideos('teste').then((res) => this.insertFilms(res.data.items, res.data));
+  async getVideos(searchString: string) {
+    this.videosService.getVideos(searchString).then((res) => this.insertFilms(res.data.items, res.data));
   }
 
   onClickSearch() {
-    let search = this.formSearch.controls.stringSeach.value;
-    search = search.replaceAll(' ', '+');
+    this.stringSearch = this.formSearch.controls.stringSeach.value;
+    this.stringSearch = this.stringSearch.replaceAll(' ', '+');
+    this.getVideos(this.stringSearch);
   }
 
   insertFilms(item: Item[], data) {
