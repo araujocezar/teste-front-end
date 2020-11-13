@@ -21,11 +21,15 @@
             </div>
         </mat-card>
     </div>
-    <div fxLayout="row wrap" >
+    <div fxLayout="row wrap" *ngIf="videosList">
         <app-videos-card *ngFor="let video of items;" [video]="video" fxFlex="33" fxFlex.xs="100" fxFlex.sm="50"></app-videos-card>
     </div>
-    <div *ngIf="processing === true" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px">
-        <mat-spinner color="accent" diameter="40"></mat-spinner>
-        <span>Carregando...</span>
+    <div *ngIf="!videosList" fxLayoutAlign="center" fxLayout="column">
+        <div class="text">
+            <h3>Não encontramos vídeos com o termo buscado</h3>
+        </div>
+        <div class="text">
+            <h3>Utilize outras palavras-chave</h3>
+        </div>
     </div>
 </div>

@@ -16,6 +16,7 @@ export class VideosListComponent implements OnInit {
   endPaginate: boolean;
   pageToken: string;
   stringSearch: any;
+  videosList: boolean;
 
   constructor(
     formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class VideosListComponent implements OnInit {
     this.items = [];
     this.processing = true;
     this.endPaginate = false;
+    this.videosList = true;
    }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class VideosListComponent implements OnInit {
   }
 
   onClickSearch() {
+    this.items = [];
     this.stringSearch = this.formSearch.controls.stringSeach.value;
     this.stringSearch = this.stringSearch.replaceAll(' ', '+');
     this.getVideos(this.stringSearch);
@@ -65,7 +68,11 @@ export class VideosListComponent implements OnInit {
     } else {
       this.items = item;
     }
-
+    if (data.pageInfo.totalResults === 0) {
+      this.videosList = false;
+    } else {
+      this.videosList = true;
+    }
     this.processing = false;
 
     if (item.length === 0) {
