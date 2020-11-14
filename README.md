@@ -7,10 +7,9 @@ Desenvolver uma aplicação HTML5.
 - npm start
 - Acessar o localhost:4200
 
-
 ## Observações
 - No arquivo env.js, substituir a linha 4 'YOUR_KEY' por a sua key de requisição da API.
 
-##Desenvolvimento
+## Desenvolvimento
 - Desenvolvido na versão 8 do framework Angular.
 
