@@ -17,7 +17,8 @@ export class VideosService {
       part: environment.api.part,
       q: searchString,
       key: environment.api.key,
-      pageToken: pageTokenI
+      pageToken: pageTokenI,
+      maxResults: 10
     };
     return axios.get('/search', {params: param});
   }
