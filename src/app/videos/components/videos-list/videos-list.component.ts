@@ -1,6 +1,6 @@
 import { VideosService } from './../../services/videos.service';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Item, Videos } from '../../interfaces/videos.interface';
 
 @Component({
@@ -26,7 +26,8 @@ export class VideosListComponent implements OnInit {
     this.formSearch = formBuilder.group({
       stringSeach: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        this.descricaoVaziaValidator
       ])]
     });
     this.load = false;
@@ -48,6 +49,12 @@ export class VideosListComponent implements OnInit {
         this.videosService.getVideos(this.stringSearch, this.pageToken).then((res) => this.insertFilms(res.data.items, res.data));
       }
     }
+  }
+
+  public descricaoVaziaValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'espaco-branco': true };
   }
 
   async getVideos(searchString: string) {
