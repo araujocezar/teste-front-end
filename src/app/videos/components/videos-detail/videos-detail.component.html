@@ -1,1 +1,55 @@
-<p>videos-detail works!</p>
+<ng-container *ngIf="video; then videoTemplate; else spinnerTemplate"></ng-container>
+<ng-template #videoTemplate>
+<div fxLayout="column" fxFlex>
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start center">
+        <button class="button" mat-raised-button (click)="onClickBack()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <h3>{{item?.snippet.localized.title}}</h3>
+    </div>
+    <div fxFlex fxLayoutGap="16px" fxLayout="column">
+        <div class="embed">
+            <iframe fxFlex [src]="urlSafe"></iframe>
+        </div>
+        <div fxLayout="row" class="header" fxLayoutAlign="center">
+            <div fxFlex=50 class="texto">
+                <strong>{{item?.snippet.channelTitle}}</strong>
+            </div>
+            <div fxFlex=50>
+                <div fxFlex=50 fxLayoutAlign="center center">
+                    <div>
+                        <mat-icon>thumb_up</mat-icon>
+                    </div>
+                    <div class="feedback">
+                        {{item?.statistics.likeCount}}
+                    </div>  
+                </div>
+                <div fxFlex=50 fxLayoutAlign="center center">
+                    <div>
+                        <mat-icon>thumb_down</mat-icon>
+                    </div>
+                    <div class="feedback">
+                        {{item?.statistics.dislikeCount}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            {{item?.snippet.description}}
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+            <div>
+                <mat-icon>visibility</mat-icon>
+            </div>
+            <div class="feedback">
+                {{item?.statistics.viewCount}}
+            </div>
+        </div>
+    </div>
+</div>
+</ng-template>
+<ng-template #spinnerTemplate>
+    <div class="full" fxLayoutAlign="center center">
+        <mat-spinner color="accent" diameter="60"></mat-spinner>
+    </div>
+</ng-template>

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Item, Videos } from '../../interfaces/videos.interface';
 
 @Component({
   selector: 'app-videos-card',
@@ -7,12 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class VideosCardComponent implements OnInit {
 
-  @Input() video: any[];
+  @Input() video: Item;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.video);
+  }
+  onClickDetail() {
+    this.router.navigate([`/${this.video.id.videoId}`]);
+
   }
 
 }

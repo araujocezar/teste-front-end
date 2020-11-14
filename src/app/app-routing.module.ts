@@ -4,9 +4,14 @@ import { VideosListComponent } from './videos/components/videos-list/videos-list
 import { VideosListModule } from './videos/components/videos-list/videos-list.module';
 
 const routes: Routes = [
-    { path: '**',
+    {
+    path: '',
     loadChildren: './videos/components/videos-list/videos-list.module#VideosListModule',
     },
+    {
+      path: ':id',
+      loadChildren: './videos/components/videos-detail/videos-detail.module#VideosDetailModule'
+    }
 ];
 
 @NgModule({

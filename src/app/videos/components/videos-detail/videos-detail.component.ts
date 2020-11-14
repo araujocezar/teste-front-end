@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Item, Videos } from './../../interfaces/videos.interface';
+import { VideosService } from './../../services/videos.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-videos-detail',
@@ -7,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideosDetailComponent implements OnInit {
 
-  constructor() { }
+  videoId: string;
+  video: Videos;
+  item: Item;
+  urlSafe: SafeResourceUrl;
+  url: string;
 
-  ngOnInit(): void {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public videosService: VideosService,
+    public sanitizer: DomSanitizer,
+    private router: Router
+  ) {
+    this.videoId = this.activatedRoute.snapshot.params.id;
+    this.url = `https://www.youtube.com/embed/${this.videoId}`;
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.videosService.getVideoDetail(this.videoId).then((res) => this.video = res.data);
+    this.item = this.video.items[0];
+    this.urlSafe = await this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
+
+  onClickBack() {
+    this.router.navigate([`/`]);
+  }
 }

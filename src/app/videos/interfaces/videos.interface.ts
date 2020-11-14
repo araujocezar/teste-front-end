@@ -1,8 +1,8 @@
 export interface Videos {
     kind: string;
     etag: string;
-    nextPageToken: string;
-    regionCode: string;
+    nextPageToken?: string;
+    regionCode?: string;
     pageInfo: PageInfo;
     items: Item[];
 }
@@ -12,6 +12,7 @@ export interface Item {
     etag: string;
     id: Id;
     snippet: Snippet;
+    statistics?: Statistics;
 }
 
 export interface Snippet {
@@ -22,13 +23,20 @@ export interface Snippet {
     thumbnails: Thumbnails;
     channelTitle: string;
     liveBroadcastContent: string;
-    publishTime: string;
+    publishTime?: string;
+    tags?: string[];
+    categoryId?: string;
+    defaultLanguage?: string;
+    localized?: Localized;
+    defaultAudioLanguage?: string;
 }
 
 export interface Thumbnails {
     default: Default;
     medium: Default;
     high: Default;
+    standard?: Default;
+    maxres?: Default;
 }
 
 export interface Default {
@@ -45,4 +53,17 @@ export interface Id {
 export interface PageInfo {
     totalResults: number;
     resultsPerPage: number;
+}
+
+interface Statistics {
+    viewCount: string;
+    likeCount: string;
+    dislikeCount: string;
+    favoriteCount: string;
+    commentCount: string;
+}
+
+interface Localized {
+    title: string;
+    description: string;
 }

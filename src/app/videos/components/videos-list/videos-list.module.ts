@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule  } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { VideosListComponent } from './videos-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { VideoListRoutes } from './videos-list.routing';
@@ -22,7 +22,8 @@ import { VideoListRoutes } from './videos-list.routing';
         ReactiveFormsModule,
         FormsModule,
         RouterModule.forChild(VideoListRoutes),
-        VideosCardModule
+        VideosCardModule,
+        MatProgressSpinnerModule
     ],
 
     exports: [

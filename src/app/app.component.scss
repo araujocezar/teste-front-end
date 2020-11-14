@@ -1,5 +1,9 @@
 .container {
   padding: 20px 16px 0 16px;
   height: calc(100% - 80px);
-  // background-color: #282C2F;
+  @media screen and (min-width: 800px){
+    margin-left: 15%;
+    margin-right: 15%;    
+  }
+  max-height: 800px;
 }

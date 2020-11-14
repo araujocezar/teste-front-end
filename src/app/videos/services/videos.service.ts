@@ -12,13 +12,24 @@ export class VideosService {
     this.registerBaseEndpoint(`${environment.api.endpoint}/`);
    }
 
-  getVideos(searchString: string): Promise<AxiosResponse<Videos>> {
+  getVideos(searchString: string, pageTokenI?: string) {
     const param = {
       part: environment.api.part,
       q: searchString,
       key: environment.api.key,
+      pageToken: pageTokenI,
+      maxResults: 10
     };
     return axios.get('/search', {params: param});
+  }
+
+  getVideoDetail(videoId: string): Promise<AxiosResponse<Videos>> {
+    const param = {
+      part: environment.api.partDetail,
+      id: videoId,
+      key: environment.api.key,
+    };
+    return axios.get('/videos', { params: param });
   }
 
   private registerBaseEndpoint(endpoint: string) {
