@@ -1,7 +1,7 @@
 import { Item, Videos } from './../../interfaces/videos.interface';
 import { VideosService } from './../../services/videos.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +20,8 @@ export class VideosDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public videosService: VideosService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private router: Router
   ) {
     this.videoId = this.activatedRoute.snapshot.params.id;
     this.url = `https://www.youtube.com/embed/${this.videoId}`;
@@ -33,6 +34,6 @@ export class VideosDetailComponent implements OnInit {
   }
 
   onClickBack() {
-    window.history.back();
+    this.router.navigate([`/`]);
   }
 }

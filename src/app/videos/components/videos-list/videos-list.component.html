@@ -6,14 +6,14 @@
                     <form [formGroup]="formSearch">
                         <mat-form-field fxFlex>
                             <mat-label>Pesquisar</mat-label>
-                            <input matInput formControlName="stringSeach">
-                            <mat-error *ngIf="formSearch.get('stringSeach').hasError('required')">
+                            <input matInput formControlName="stringSearch">
+                            <mat-error *ngIf="formSearch.get('stringSearch').hasError('required')">
                                O campo é obrigatório
                             </mat-error>
-                            <mat-error *ngIf="formSearch.get('stringSeach').hasError('minlength')">
+                            <mat-error *ngIf="formSearch.get('stringSearch').hasError('minlength')">
                                 O campo necessita de pelo menos 2 digítos
                             </mat-error>
-                            <mat-error *ngIf="formSearch.get('stringSeach').hasError('espaco-branco') && !formSearch.get('stringSeach').hasError('required') ">
+                            <mat-error *ngIf="formSearch.get('stringSearch').hasError('espaco-branco') && !formSearch.get('stringSearch').hasError('required') ">
                                 Caracteres inválidos
                             </mat-error>
                         </mat-form-field>

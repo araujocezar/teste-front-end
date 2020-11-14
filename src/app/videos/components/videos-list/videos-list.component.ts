@@ -2,6 +2,7 @@ import { VideosService } from './../../services/videos.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Item, Videos } from '../../interfaces/videos.interface';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-videos-list',
@@ -24,7 +25,7 @@ export class VideosListComponent implements OnInit {
 
   ) {
     this.formSearch = formBuilder.group({
-      stringSeach: ['', Validators.compose([
+      stringSearch: ['', Validators.compose([
         Validators.required,
         Validators.minLength(2),
         this.descricaoVaziaValidator
@@ -38,6 +39,14 @@ export class VideosListComponent implements OnInit {
    }
 
   ngOnInit() {
+    const search = localStorage.getItem('search');
+    if (search) {
+      this.formSearch.patchValue({
+        stringSearch: search,
+      });
+      this.onClickSearch();
+      localStorage.removeItem('search');
+    }
   }
 
   @HostListener('window:scroll', ['$event']) onWindowScroll($event) {
@@ -63,9 +72,10 @@ export class VideosListComponent implements OnInit {
 
   onClickSearch() {
     this.items = [];
-    this.stringSearch = this.formSearch.controls.stringSeach.value;
+    this.stringSearch = this.formSearch.controls.stringSearch.value;
     this.stringSearch = this.stringSearch.replaceAll(' ', '+');
     this.getVideos(this.stringSearch);
+    localStorage.setItem('search', this.stringSearch);
   }
 
   insertFilms(item: Item[], data) {
